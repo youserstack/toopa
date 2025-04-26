@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>spring boot</title>
+</head>
+<body>
+  <main>
+    <section>
+
+      <th:block sec:authorize="isAuthenticated()">
+        <p>로그인한 사용자만 볼 수 있는 내용입니다.</p>
+      </th:block>
+
+      <th:block sec:authorize="!isAuthenticated()">
+        <p>미인증 사용자만 볼 수 있는 내용입니다.</p>
+      </th:block>
+
+
+    </section>
+  </main>
+</body>
+</html>
+
+
+
+      <!-- <span th:if="${user != null}" th:text="${user.username}"></span>
+      <span th:if="${user == null}">로그인하지 않았습니다.</span> -->

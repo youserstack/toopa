@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: toopa
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # 개발 중에는 update, 운영 시에는 validate 또는 none 권장
+  #   properties:
+  #     hibernate:
+  #       dialect: org.hibernate.dialect.MySQL8Dialect
+  #       format_sql: true
+  #   show-sql: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    # url: jdbc:h2:mem:testdb;MODE=MYSQL
+    driver-class-name: org.h2.Driver
+    username: mike
+    password: 
+
+    # url: jdbc:mysql://localhost:3306/your_database_name?serverTimezone=UTC&characterEncoding=UTF-8
+    # username: your_db_username
+    # password: your_db_password
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JWT 검증용 OAuth2 Resource Server 설정
+  # security:
+  #   oauth2:
+  #     resourceserver:
+  #       jwt:
+  #         issuer-uri: https://accounts.google.com  # 또는 jwk-set-uri: https://provider.com/jwks.json
+
+
+
+
+logging:
+  level:
+    # org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+  #   pattern:
+  #     console: "%d{HH:mm:ss} [%level] %msg%n"
+
+
+"com.youserstack.toopa.secret-key": "xD8ZuzMTD7IapdmNO3XQdtjQAx1n4SoVUJCcP6b6aoE"
