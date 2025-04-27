@@ -1,31 +1,19 @@
-package com.youserstack.toopa.jwt.config;
+package com.youserstack.toopa.config;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-  @Autowired
-  private DataSource dataSource;
-
-  // 보안 필터 체인 설정 (HTTP 요청 보안 규칙 정의)
+  // 보안필터체인 설정 (HTTP요청 보안규칙 정의)
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -58,41 +46,10 @@ public class SecurityConfig {
     return http.build();
   }
 
-  // 비밀번호 암호화를 위한 메서드
+  // 비밀번호 암호화
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
-
-  // 인증관리자 메서드
-  // @Bean
-  // public AuthenticationManager
-  // authenticationManager(AuthenticationConfiguration
-  // authenticationConfiguration)
-  // throws Exception {
-  // return authenticationConfiguration.getAuthenticationManager();
-  // }
-
-  // JDBC 기반 사용자 인증 설정
-  // @Bean
-  // public UserDetailsService userDetailsService() {
-  // JdbcUserDetailsManager jdbcUserDetailsManager = new
-  // JdbcUserDetailsManager(dataSource);
-
-  // // 사용자인증쿼리
-  // String sql1 = " SELECT username , password , enabled "
-  // + " FROM user "
-  // + "WHERE username = ? ";
-
-  // // 사용자권한쿼리
-  // String sql2 = " SELECT username , auth "
-  // + " FROM user_auth "
-  // + "WHERE username = ? ";
-
-  // jdbcUserDetailsManager.setUsersByUsernameQuery(sql1);
-  // jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(sql2);
-
-  // return jdbcUserDetailsManager;
-  // }
 
 }

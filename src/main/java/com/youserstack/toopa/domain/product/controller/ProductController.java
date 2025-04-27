@@ -1,9 +1,9 @@
-package com.youserstack.toopa.product.controller;
+package com.youserstack.toopa.domain.product.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.youserstack.toopa.product.dto.ProductDto;
-import com.youserstack.toopa.product.entity.Product;
+import com.youserstack.toopa.domain.product.dto.ProductDto;
+import com.youserstack.toopa.domain.product.entity.ProductEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,12 +29,12 @@ public class ProductController {
   }
 
   @GetMapping("/products")
-  public ResponseEntity<List<Product>> getProducts() {
+  public ResponseEntity<List<ProductEntity>> getProducts() {
     System.out.println("GET /products");
 
-    List<Product> products = new ArrayList<>();
-    products.add(new Product(1L, "name1", "sdhflsdf", "category1", "nike", new BigDecimal(23)));
-    products.add(new Product(2L, "name2", "sdhflsdf", "category1", "nike", new BigDecimal(12)));
+    List<ProductEntity> products = new ArrayList<>();
+    products.add(new ProductEntity(1L, "name1", "sdhflsdf", "category1", "nike", new BigDecimal(23)));
+    products.add(new ProductEntity(2L, "name2", "sdhflsdf", "category1", "nike", new BigDecimal(12)));
     System.out.println("products : " + products);
 
     // return new ResponseEntity<>(products, HttpStatus.OK);

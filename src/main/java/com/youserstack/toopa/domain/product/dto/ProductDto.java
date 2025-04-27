@@ -1,4 +1,4 @@
-package com.youserstack.toopa.product.dto;
+package com.youserstack.toopa.domain.product.dto;
 
 import java.math.BigDecimal;
 

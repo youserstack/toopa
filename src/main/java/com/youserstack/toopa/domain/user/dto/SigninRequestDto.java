@@ -1,4 +1,4 @@
-package com.youserstack.toopa.account.dto;
+package com.youserstack.toopa.domain.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SigninRequest {
+public class SigninRequestDto {
 
   private String email;
   private String password;

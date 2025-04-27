@@ -1,4 +1,4 @@
-package com.youserstack.toopa.product.entity;
+package com.youserstack.toopa.domain.product.entity;
 
 import java.math.BigDecimal;
 
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Product {
+public class ProductEntity {
 
   private Long id;
 

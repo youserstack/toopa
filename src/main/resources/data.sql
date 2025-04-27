@@ -1,9 +1,16 @@
-CREATE TABLE IF NOT EXISTS account (
+
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS user_entity (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255),
-    password VARCHAR(255), -- ✅ 추가
-    role VARCHAR(255)
+    email VARCHAR(255) NOT NULL UNIQUE,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL
 );
 
-INSERT INTO account (name, email, password, role) VALUES ('mike', 'mike@gmail.com', '$2a$10$5lK/DG19HkUgFEuM2IUp9OGqMTGRHlGlyZzHtVhKgi1a7.ixIEkY2', 'tester');
+INSERT INTO user_entity (email, name, password, role)
+VALUES ('mike@gmail.com', 'mike', '$2a$10$VvrDaLREEwBgkoxE8lRciuTjnTkawKnfGYGVTnVkds7QtHEbLhp3i', 'tester');
