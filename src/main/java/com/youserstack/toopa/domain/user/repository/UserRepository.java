@@ -4,8 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.youserstack.toopa.domain.user.entity.UserEntity;
 
-import java.util.Optional;
-
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-  Optional<UserEntity> findByEmail(String email);
+  UserEntity findByEmail(String email);
+
+  // 이메일 존재 여부 체크
+  boolean existsByEmail(String email);
+
 }

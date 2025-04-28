@@ -2,11 +2,16 @@ package com.youserstack.toopa.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.youserstack.toopa.domain.user.entity.UserRoleType;
+
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
@@ -50,6 +55,16 @@ public class SecurityConfig {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  // RoleHierarchy를 설정하는 메서드
+  public RoleHierarchy roleHierarchy() {
+    // RoleHierarchyImpl를 사용하여 ROLE_ 접두어를 포함하는 역할 계층을 설정
+    return RoleHierarchyImpl.withRolePrefix("ROLE_")
+        // "ADMIN" 역할은 "USER" 역할을 포함(즉, ADMIN은 USER의 권한을 자동으로 포함)
+        .role(UserRoleType.ADMIN.toString()).implies(UserRoleType.USER.toString())
+        // 설정을 마친 후 RoleHierarchy 객체를 빌드하여 반환
+        .build();
   }
 
 }

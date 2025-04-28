@@ -22,7 +22,7 @@ public class UserController {
   @PostMapping("/api/signup")
   public ResponseEntity<Void> signup(@RequestBody SignupRequestDto request) {
 
-    // 등록처리
+    // 등록
     userService.register(request);
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -51,7 +51,6 @@ public class UserController {
       return ResponseEntity.notFound().build();
     }
 
-    // 응답처리
     return ResponseEntity.ok(response);
   }
 

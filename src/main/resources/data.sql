@@ -13,4 +13,5 @@ CREATE TABLE IF NOT EXISTS user_entity (
 );
 
 INSERT INTO user_entity (email, name, password, role)
-VALUES ('mike@gmail.com', 'mike', '$2a$10$VvrDaLREEwBgkoxE8lRciuTjnTkawKnfGYGVTnVkds7QtHEbLhp3i', 'tester');
+VALUES ('mike@gmail.com', 'mike', '$2a$10$VvrDaLREEwBgkoxE8lRciuTjnTkawKnfGYGVTnVkds7QtHEbLhp3i', 'USER');
+
