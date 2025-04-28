@@ -24,14 +24,14 @@ public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
-  // 등록
+  // 회원가입
   @Transactional
-  public void register(SignupRequestDto request) {
-    log.info("{}", request);
+  public void signup(SignupRequestDto request) {
+    log.info("☑️ 회원가입 : {}", request);
 
     // 이미 등록된 이메일이 있는지 확인
     if (userRepository.existsByEmail(request.getEmail())) {
-      throw new IllegalArgumentException("❌ 이미 등록된 이메일입니다.");
+      throw new IllegalArgumentException("❌ 이미 가입된 이메일입니다.");
     }
 
     // 새로운 유저 엔터티 생성
@@ -44,47 +44,52 @@ public class UserService {
 
     // 저장소에 저장
     userRepository.save(userEntity);
+    log.info("🟢 회원가입 완료 {}", userEntity);
+
   }
 
-  // 인증
+  // 로그인
   // 인가처리는 넥스트서버에서 토큰발급으로 처리
-  public SigninResponseDto authenticate(SigninRequestDto request) {
-    log.info("{}", request);
+  public SigninResponseDto signin(SigninRequestDto request) {
+    log.info("☑️ 로그인 : {}", request);
 
     // 이메일로 유저 정보 조회
     UserEntity userEntity = userRepository.findByEmail(request.getEmail());
     if (userEntity == null) {
-      throw new EntityNotFoundException(
-          String.format("%s은(는) 존재하지 않는 이메일입니다.", request.getEmail()));
+      throw new EntityNotFoundException("❌ 존재하지 않는 이메일입니다.");
     }
 
     // 비밀번호 일치 여부 확인
     if (!passwordEncoder.matches(request.getPassword(), userEntity.getPassword())) {
-      throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+      throw new IllegalArgumentException("❌ 비밀번호가 일치하지 않습니다.");
     }
 
     // 유저 엔터티 데이터를 DTO에 담아서 반환
-    return new SigninResponseDto(
+    SigninResponseDto signinResponseDto = new SigninResponseDto(
         userEntity.getEmail(),
         userEntity.getName(),
         userEntity.getRole().name());
+    log.info("🟢 로그인 완료 {}", signinResponseDto);
+    return signinResponseDto;
   }
 
-  // 조회
+  // 계정조회
   public UserDto getUserByEmail(String email) {
-    log.info("email: {}", email);
+    log.info("☑️ 계정조회 : {}", email);
 
     // 이메일로 유저 정보 조회
     UserEntity userEntity = userRepository.findByEmail(email);
     if (userEntity == null) {
-      throw new EntityNotFoundException("조회되지 않는 이메일입니다.");
+      throw new EntityNotFoundException("❌ 존재하지 않는 이메일입니다.");
     }
 
     // 유저 엔터티 데이터를 DTO에 담아서 반환
-    return new UserDto(
+    UserDto userDto = new UserDto(
         userEntity.getEmail(),
         userEntity.getName(),
         userEntity.getRole().name());
+    log.info("🟢 계정조회 : {}", userDto);
+    return userDto;
   }
 
 }
