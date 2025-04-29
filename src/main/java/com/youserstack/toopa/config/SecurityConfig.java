@@ -23,6 +23,7 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
     http
+        // 접근권한 인가설정
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/h2-console/**").permitAll() // H2 콘솔에 대한 접근 허용
             .requestMatchers("/**").permitAll() // 모든 요청을 허용

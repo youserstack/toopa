@@ -39,4 +39,13 @@ public class UserEntity {
   private UserRoleType role;
   // private String role;
 
+  public void updateUserInfo(String name, String password) {
+    if (name != null && !name.isBlank()) {
+      this.name = name;
+    }
+    if (password != null && !password.isBlank()) {
+      this.password = password;
+    }
+  }
+
 }

@@ -5,8 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserDto {
+public class UserResponseDto {
+
   private String email;
   private String name;
   private String role;
+
 }
