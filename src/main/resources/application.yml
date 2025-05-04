@@ -16,11 +16,9 @@ spring:
 
   datasource:
     url: jdbc:h2:mem:testdb
-    # url: jdbc:h2:mem:testdb;MODE=MYSQL
     driver-class-name: org.h2.Driver
     username: mike
     password: 
-
     # url: jdbc:mysql://localhost:3306/your_database_name?serverTimezone=UTC&characterEncoding=UTF-8
     # username: your_db_username
     # password: your_db_password
@@ -33,13 +31,18 @@ spring:
   #       jwt:
   #         issuer-uri: https://accounts.google.com  # 또는 jwk-set-uri: https://provider.com/jwks.json
 
+  cors:
+    allowed-origins:
+      - http://localhost:3000
+
+
 
 
 
 logging:
   level:
-    # org.springframework.security: DEBUG
     org.hibernate.SQL: DEBUG
+    # org.springframework.security: DEBUG
   #   pattern:
   #     console: "%d{HH:mm:ss} [%level] %msg%n"
 
