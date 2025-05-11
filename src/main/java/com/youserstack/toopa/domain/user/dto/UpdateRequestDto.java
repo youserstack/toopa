@@ -1,12 +1,8 @@
 package com.youserstack.toopa.domain.user.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
 
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UpdateRequestDto {
 
     private String name;

@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.youserstack.toopa.domain.user.entity.UserRoleType;
 
-import org.springframework.security.config.http.SessionCreationPolicy;
+// import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
