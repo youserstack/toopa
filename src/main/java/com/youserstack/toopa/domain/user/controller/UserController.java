@@ -2,13 +2,15 @@ package com.youserstack.toopa.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.HttpStatus;
+import java.net.URI;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.youserstack.toopa.domain.user.dto.UserResponseDto;
-import com.youserstack.toopa.domain.user.dto.SignupRequestDto;
-import com.youserstack.toopa.domain.user.dto.UpdateRequestDto;
+import com.youserstack.toopa.domain.user.dto.UserReadDto;
+import com.youserstack.toopa.domain.user.dto.UserCreateDto;
+import com.youserstack.toopa.domain.user.dto.UserUpdateDto;
 import com.youserstack.toopa.domain.user.service.UserService;
 
 import jakarta.validation.Valid;
@@ -22,25 +24,38 @@ public class UserController {
 
   // 🟩 회원 생성
   @PostMapping
-  public ResponseEntity<?> signup(@RequestBody SignupRequestDto dto) {
-    userService.createUser(dto);
-    return ResponseEntity.status(HttpStatus.CREATED).build();
+  public ResponseEntity<Void> signup(@RequestBody UserCreateDto dto) {
+    String userEmail = userService.createUser(dto);
+    URI location = URI.create("/api/users/" + userEmail);
+    return ResponseEntity.created(location).build();
+  }
+
+  // ⬜ 회원 다건 조회
+  @GetMapping
+  public ResponseEntity<List<UserReadDto>> getAllUsers() {
+    List<UserReadDto> users = userService.getAllUsers();
+    return ResponseEntity.ok(users);
   }
 
   // ⬜ 회원 단건 조회
-  @GetMapping
-  public ResponseEntity<?> getUser(@RequestParam String email) {
-    UserResponseDto response = userService.getUser(email);
-    if (response == null)
-      return ResponseEntity.notFound().build();
-    return ResponseEntity.ok(response);
+  @GetMapping("/{email}")
+  public ResponseEntity<UserReadDto> getUser(@PathVariable String email) {
+    UserReadDto dto = userService.getUser(email);
+    return ResponseEntity.ok(dto);
   }
 
   // 🟨 회원 수정
-  @PutMapping
-  public ResponseEntity<?> updateUser(@RequestBody @Valid UpdateRequestDto dto, @RequestParam String email) {
+  @PutMapping("/{email}")
+  public ResponseEntity<Void> updateUser(@RequestBody @Valid UserUpdateDto dto, @PathVariable String email) {
     userService.updateUser(dto, email);
-    return ResponseEntity.ok("회원정보 수정 완료");
+    return ResponseEntity.noContent().build();
+  }
+
+  // 🟥 회원 삭제
+  @DeleteMapping("/{email}")
+  public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+    userService.deleteUser(email);
+    return ResponseEntity.noContent().build();
   }
 
 }

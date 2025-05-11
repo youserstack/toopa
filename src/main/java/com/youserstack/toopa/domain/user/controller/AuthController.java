@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.youserstack.toopa.domain.user.dto.SigninRequestDto;
-import com.youserstack.toopa.domain.user.dto.SigninResponseDto;
+import com.youserstack.toopa.domain.user.dto.AuthRequestDto;
+import com.youserstack.toopa.domain.user.dto.AuthResponseDto;
 import com.youserstack.toopa.domain.user.service.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,10 @@ public class AuthController {
 
   private final AuthService authService;
 
-  // 🟦 회원 로그인
+  // 🟦 회원 인증
   @PostMapping
-  public ResponseEntity<?> signin(@RequestBody SigninRequestDto dto) {
-    SigninResponseDto response = authService.authenticate(dto);
-    if (response == null)
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+  public ResponseEntity<AuthResponseDto> signin(@RequestBody AuthRequestDto dto) {
+    AuthResponseDto response = authService.authenticate(dto);
     return ResponseEntity.ok(response);
   }
 

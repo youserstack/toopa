@@ -1,12 +1,14 @@
 package com.youserstack.toopa.domain.user.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class SignupRequestDto {
+@Builder
+public class AuthResponseDto {
 
   private String email;
   private String name;
-  private String password;
+  private String role;
 
 }

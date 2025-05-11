@@ -28,12 +28,17 @@ public class ProductController {
 
   private final ProductService productService;
 
+  // 🟩 상품 등록
+  @PostMapping
+  public ResponseEntity<?> createProduct(@RequestBody ProductEntity product) {
+    ProductEntity createdProduct = productService.createProduct(product);
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+  }
+
   // ⬜ 상품 전체 조회
   @GetMapping
   public ResponseEntity<List<ProductEntity>> getAllProducts() {
     List<ProductEntity> products = productService.getAllProducts();
-    products.add(new ProductEntity(1L, "name1", "sdhflsdf", "category1", "nike", new BigDecimal(23)));
-    products.add(new ProductEntity(2L, "name2", "sdhflsdf", "category1", "nike", new BigDecimal(12)));
     return ResponseEntity.ok(products);
   }
 
@@ -42,13 +47,6 @@ public class ProductController {
   public ResponseEntity<ProductEntity> getProductById(@PathVariable Long id) {
     ProductEntity product = productService.getProductById(id);
     return ResponseEntity.ok(product);
-  }
-
-  // 🟩 상품 등록
-  @PostMapping
-  public ResponseEntity<ProductEntity> createProduct(@RequestBody ProductEntity product) {
-    ProductEntity createdProduct = productService.createProduct(product);
-    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
   }
 
   // 🟨 상품 수정
