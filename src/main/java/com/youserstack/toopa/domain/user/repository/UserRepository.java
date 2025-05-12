@@ -1,11 +1,9 @@
 package com.youserstack.toopa.domain.user.repository;
 
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.youserstack.toopa.domain.user.entity.UserEntity;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {

@@ -6,4 +6,5 @@ import com.youserstack.toopa.domain.product.entity.ProductEntity;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
+
 }
