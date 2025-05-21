@@ -3,14 +3,11 @@ package com.youserstack.toopa.domain.product.service;
 import com.youserstack.toopa.domain.product.dto.ProductDto;
 import com.youserstack.toopa.domain.product.entity.ProductEntity;
 import com.youserstack.toopa.domain.product.repository.ProductRepository;
-
-import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class ProductService {
     // 🟩 상품 등록
     @Transactional
     public String createProduct(ProductDto dto) {
-        log.info("🟩 상품 등록 : dto={}", dto);
+        log.info("🟩 상품 등록 : {}", dto);
 
         // 엔터티 생성
         ProductEntity newProduct = ProductEntity.builder()
@@ -37,7 +34,7 @@ public class ProductService {
 
         // 저장
         productRepository.save(newProduct);
-        log.info("🟩 상품 등록 {}", newProduct);
+        log.info("🟩 상품 등록 : {}", newProduct);
 
         return newProduct.getId().toString();
     }
@@ -90,7 +87,7 @@ public class ProductService {
     // 🟨 상품 수정
     @Transactional
     public void updateProduct(Long id, ProductDto dto) {
-        log.info("🟨 상품 수정 : dto={}", dto);
+        log.info("🟨 상품 수정 : {}", dto);
 
         // 쿼리 조회
         ProductEntity product = productRepository.findById(id)
@@ -108,13 +105,13 @@ public class ProductService {
 
         // 저장
         productRepository.save(updatedProduct);
-        log.info("🟨 상품 수정 : product={}", product);
+        log.info("🟨 상품 수정 : {}", product);
     }
 
     // 🟥 상품 삭제
     @Transactional
     public void deleteProduct(Long id) {
-        log.info("🟥 상품 삭제 : id={}", id);
+        log.info("🟥 상품 삭제 : {}", id);
 
         // 쿼리 조회
         ProductEntity deletingProduct = productRepository.findById(id)
@@ -122,7 +119,7 @@ public class ProductService {
 
         // 삭제
         productRepository.delete(deletingProduct);
-        log.info("🟥 상품 삭제 : id={}", id);
+        log.info("🟥 상품 삭제 : {}", id);
     }
 
 }

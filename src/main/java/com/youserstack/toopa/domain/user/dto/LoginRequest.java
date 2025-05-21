@@ -3,9 +3,9 @@ package com.youserstack.toopa.domain.user.dto;
 import lombok.Data;
 
 @Data
-public class UserUpdateDto {
+public class LoginRequest {
 
-  private String name;
+  private String email;
   private String password;
 
 }
