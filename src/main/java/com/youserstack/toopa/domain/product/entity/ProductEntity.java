@@ -27,6 +27,9 @@ public class ProductEntity {
 
   @Column(nullable = false)
   private String name;
+
+  private String link;
+  private String image;
   private String brand;
   private String category;
   private String description;

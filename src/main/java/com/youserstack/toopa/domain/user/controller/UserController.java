@@ -29,15 +29,15 @@ public class UserController {
   // ⬜ 회원 다건 조회
   @GetMapping
   public ResponseEntity<List<UserResponse>> getAllUsers() {
-    List<UserResponse> responses = userService.getAllUsers();
-    return ResponseEntity.ok(responses);
+    List<UserResponse> users = userService.getAllUsers();
+    return ResponseEntity.ok(users);
   }
 
   // ⬜ 회원 단건 조회
   @GetMapping("/{email}")
   public ResponseEntity<UserResponse> getUser(@PathVariable String email) {
-    UserResponse response = userService.getUser(email);
-    return ResponseEntity.ok(response);
+    UserResponse user = userService.getUser(email);
+    return ResponseEntity.ok(user);
   }
 
   // 🟨 회원 수정
