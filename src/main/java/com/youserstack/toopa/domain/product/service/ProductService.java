@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -73,6 +74,11 @@ public class ProductService {
     log.info("⬜ 상품 다건 조회 : {}", products);
     return responses;
 
+  }
+
+  // ⬜ 상품 전체 아이디 조회 (정적페이지생성을위한)
+  public List<Long> getAllProductIds() {
+    return productRepository.findAllIds();
   }
 
   // ⬜ 상품 단건 조회

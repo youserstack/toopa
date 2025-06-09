@@ -45,6 +45,13 @@ public class ProductController {
     return ResponseEntity.ok(products);
   }
 
+  // ⬜ 상품 전체 아이디 조회 (정적페이지생성을위한)
+  @GetMapping("/ids")
+  public ResponseEntity<List<Long>> getProductIds() {
+    List<Long> ids = productService.getAllProductIds();
+    return ResponseEntity.ok(ids);
+  }
+
   // ⬜ 상품 단건 조회
   @GetMapping("/{id}")
   public ResponseEntity<ProductResponse> getProductById(@PathVariable(name = "id") Long id) {
