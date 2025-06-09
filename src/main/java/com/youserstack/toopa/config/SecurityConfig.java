@@ -25,7 +25,7 @@ public class SecurityConfig {
     http
         // 접근권한 인가설정
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/h2-console/**").permitAll() // H2 콘솔에 대한 접근 허용
+            // .requestMatchers("/h2-console/**").permitAll() // H2 콘솔에 대한 접근 허용
             .requestMatchers("/**").permitAll() // 모든 요청을 허용
             .anyRequest().authenticated() // 나머지 요청은 인증 필요
         )
@@ -39,12 +39,12 @@ public class SecurityConfig {
         // CSRF 보호기능 비활성화
         .csrf(csrf -> csrf.disable())
 
-        // 세션 정책 설정
-        // 세션 사용하지않고, jwt 사용하기때문에, 세션 불필요
-        // .sessionManagement(management ->
-        // management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        // X-Frame-Options
-        .headers(headers -> headers.frameOptions().sameOrigin());
+    // 세션 정책 설정
+    // 세션 사용하지않고, jwt 사용하기때문에, 세션 불필요
+    // .sessionManagement(management ->
+    // management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+    // X-Frame-Options
+    // .headers(headers -> headers.frameOptions().sameOrigin());
 
     //
     ;

@@ -39,14 +39,15 @@ public class ProductController {
 
   // ⬜ 상품 전체 조회
   @GetMapping
-  public ResponseEntity<List<ProductResponse>> getAllProducts(@RequestParam(required = false) String category) {
+  public ResponseEntity<List<ProductResponse>> getAllProducts(
+      @RequestParam(name = "category", required = false) String category) {
     List<ProductResponse> products = productService.getAllProducts(category);
     return ResponseEntity.ok(products);
   }
 
   // ⬜ 상품 단건 조회
   @GetMapping("/{id}")
-  public ResponseEntity<ProductResponse> getProductById(@PathVariable Long id) {
+  public ResponseEntity<ProductResponse> getProductById(@PathVariable(name = "id") Long id) {
     ProductResponse product = productService.getProductById(id);
     return ResponseEntity.ok(product);
   }
